@@ -22,7 +22,7 @@ spec:
             secretProviderClass: "eks-secret-credentials" 
       containers:
         - name: wy-py-con
-          image: 655088038759.dkr.ecr.ap-northeast-2.amazonaws.com/wy-redispy:39
+          image: 655088038759.dkr.ecr.ap-northeast-2.amazonaws.com/wy-redispy:5
           envFrom:
           - secretRef:
               name: eks-secret
