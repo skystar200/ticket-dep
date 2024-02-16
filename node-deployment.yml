@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wy-node-dep
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wy-node
+  template:
+    metadata:
+      labels:
+        app: wy-node
+    spec:
+      serviceAccountName: eks-secret-manager
+      volumes:
+      - name: secrets-store
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "eks-secret-credentials" 
+      containers:
+        - name: wy-node-con
+          image: 655088038759.dkr.ecr.ap-northeast-2.amazonaws.com/wy-node:31
+          envFrom:
+          - secretRef:
+              name: eks-secret
+          volumeMounts:
+          - name: secrets-store
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wy-node-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: wy-node
+  ports:
+  - port: 3000
+    targetPort: 3000
