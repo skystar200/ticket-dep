@@ -22,7 +22,7 @@ spec:
             secretProviderClass: "eks-secret-credentials" 
       containers:
         - name: wy-node-con
-          image: 655088038759.dkr.ecr.ap-northeast-2.amazonaws.com/wy-node:51
+          image: 655088038759.dkr.ecr.ap-northeast-2.amazonaws.com/wy-node:9
           envFrom:
           - secretRef:
               name: eks-secret
