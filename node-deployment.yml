@@ -34,7 +34,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wy-node-svc
+  name: test-node-svc
 spec:
   type: ClusterIP
   selector:
